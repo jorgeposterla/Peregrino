@@ -2983,24 +2983,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Peregrino\\.nuget\\packages\\": {},
+    "C:\\Users\\Maria\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Peregrino\\source\\repos\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.Android\\TravelRecordApp.Android.csproj",
+      "projectUniqueName": "D:\\Projects\\TravelRecordApp\\TravelRecordApp.Android\\TravelRecordApp.Android.csproj",
       "projectName": "TravelRecordApp.Android",
-      "projectPath": "C:\\Users\\Peregrino\\source\\repos\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.Android\\TravelRecordApp.Android.csproj",
-      "packagesPath": "C:\\Users\\Peregrino\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Peregrino\\source\\repos\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.Android\\obj\\",
+      "projectPath": "D:\\Projects\\TravelRecordApp\\TravelRecordApp.Android\\TravelRecordApp.Android.csproj",
+      "packagesPath": "C:\\Users\\Maria\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\TravelRecordApp\\TravelRecordApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Peregrino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Maria\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -3014,8 +3014,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Users\\Peregrino\\source\\repos\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.csproj": {
-              "projectPath": "C:\\Users\\Peregrino\\source\\repos\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.csproj"
+            "D:\\Projects\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.csproj": {
+              "projectPath": "D:\\Projects\\TravelRecordApp\\TravelRecordApp\\TravelRecordApp.csproj"
             }
           }
         }

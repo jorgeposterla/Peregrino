@@ -11,19 +11,24 @@
                HeightRequest="150"
                Margin="0, 0, 0, 50"/>
         <Entry x:Name="emailEntry"
+               Text="{Binding Email, Mode=TwoWay}"
                Placeholder="Email Address"
+               TextColor="{StaticResource blueColor}"
                Keyboard="Email"/>
         <Entry x:Name="passwordEntry"
+               Text="{Binding Password, Mode=TwoWay}"
                Placeholder="Password"
+               TextColor="{StaticResource blueColor}"
                IsPassword="True"/>
         <Button x:Name="LoginButton"
                 Margin="0,50,0,0"
                 Text="Login"
-                Clicked="LoginButton_Clicked"/>
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding User}"/>
         <Button x:Name="registerUserButton"
                 Text="Register"
                 HorizontalOptions="End"
-                Clicked="registerUserButton_Clicked"/>
+                Command="{Binding RegisterNavigationCommand}"/>
     </StackLayout>
 
 </ContentPage>

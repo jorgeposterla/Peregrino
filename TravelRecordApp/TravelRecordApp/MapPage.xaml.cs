@@ -20,6 +20,7 @@ namespace TravelRecordApp
         public MapPage()
         {
             InitializeComponent();
+            //GetLocation();
         }
 
         protected override async void OnAppearing()
@@ -31,7 +32,15 @@ namespace TravelRecordApp
 
             GetLocation();
 
-            var posts = await Post.Read();
+            /*using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+
+                DisplayInMap(posts);
+            }*/
+
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
             DisplayInMap(posts);
         }
 
@@ -41,6 +50,8 @@ namespace TravelRecordApp
             {
                 try
                 {
+
+
                     var position = new Xamarin.Forms.Maps.Position(post.Latitude, post.Longitude);
                     var pin = new Pin()
                     {
@@ -64,6 +75,8 @@ namespace TravelRecordApp
             var locator = CrossGeolocator.Current;
             locator.PositionChanged -= Locator_PositionChanged;
             await locator.StopListeningAsync();
+            //CrossGeolocator.Current.StopListeningAsync();
+            //CrossGeolocator.Current.PositionChanged -= Locator_PositionChanged;
         }
 
         void Locator_PositionChanged(object render, Plugin.Geolocator.Abstractions.PositionEventArgs e)

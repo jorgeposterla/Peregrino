@@ -22,6 +22,8 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
+            var posts = await Post.Read();
+            postListView.ItemsSource = posts;
             /*using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Post>();
@@ -29,18 +31,18 @@ namespace TravelRecordApp
                 postListView.ItemsSource = posts;
             }*/
 
-            var posts = await Post.Read();
-            postListView.ItemsSource = posts;
+            //var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            //postListView.ItemsSource = posts;
         }
 
-        private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var selectedPost = postListView.SelectedItem as Post;
+        //private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    var selectedPost = postListView.SelectedItem as Post;
 
-            if (selectedPost != null)
-            {
-                Navigation.PushAsync(new PostDetailPage(selectedPost));
-            }
-        }
+        //    if (selectedPost != null)
+        //    {
+        //        Navigation.PushAsync(new PostDetailPage(selectedPost));
+        //    }
+        //}
     }
 }

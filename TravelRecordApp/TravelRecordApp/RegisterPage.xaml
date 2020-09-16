@@ -5,20 +5,24 @@
     <StackLayout VerticalOptions="Center"
                  Margin="20">
         <Entry x:Name="emailEntry"
+               Text="{Binding Email, Mode=TwoWay}"
                Placeholder="Email Address"
                TextColor="{StaticResource blueColor}"
                Keyboard="Email"/>
         <Entry x:Name="passwordEntry"
+               Text="{Binding Password, Mode=TwoWay}"
                Placeholder="Password"
                TextColor="{StaticResource blueColor}"
                IsPassword="True"/>
         <Entry x:Name="confirmPasswordEntry"
+               Text="{Binding ConfirmPassword, Mode=TwoWay}"
                Placeholder="Confirm password"
                TextColor="{StaticResource blueColor}"
                IsPassword="True"/>
         <Button x:Name="registerButton"
                 Margin="0,50,0,0"
                 Text="Register"
-                Clicked="registerButton_Clicked"/>
+                Command="{Binding RegisterCommand}"
+                CommandParameter="{Binding User}"/>
     </StackLayout>
 </ContentPage>

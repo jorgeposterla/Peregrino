@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ namespace TravelRecordApp.Model
     public class Post : INotifyPropertyChanged
     {
         private string id;
+
         public string Id
         {
             get { return id; }
@@ -22,6 +24,7 @@ namespace TravelRecordApp.Model
         }
 
         private string experience;
+
         public string Experience
         {
             get { return experience; }
@@ -33,6 +36,7 @@ namespace TravelRecordApp.Model
         }
 
         private string venueName;
+
         public string VenueName
         {
             get { return venueName; }
@@ -44,6 +48,7 @@ namespace TravelRecordApp.Model
         }
 
         private string categoryId;
+
         public string CategoryId
         {
             get { return categoryId; }
@@ -55,6 +60,7 @@ namespace TravelRecordApp.Model
         }
 
         private string categoryName;
+
         public string CategoryName
         {
             get { return categoryName; }
@@ -66,18 +72,21 @@ namespace TravelRecordApp.Model
         }
 
         private string address;
+
         public string Address
         {
             get { return address; }
             set
             {
+
                 address = value;
                 OnPropertyChanged("Address");
             }
         }
 
-        private string latitude;
-        public string Latitude
+        private double latitude;
+
+        public double Latitude
         {
             get { return latitude; }
             set
@@ -87,19 +96,21 @@ namespace TravelRecordApp.Model
             }
         }
 
-        private string longitude;
-        public string Longitude
+        private double longitude;
+
+        public double Longitude
         {
             get { return longitude; }
             set
             {
                 longitude = value;
-                OnPropertyChanged("Longitude");
+                OnPropertyChanged("Latitude");
             }
         }
 
-        private string distance;
-        public string Distance
+        private int distance;
+
+        public int Distance
         {
             get { return distance; }
             set
@@ -109,9 +120,60 @@ namespace TravelRecordApp.Model
             }
         }
 
-        public string UserId { get; set; }
+        private string userId;
+
+        public string UserId
+        {
+            get { return userId; }
+            set
+            {
+                userId = value;
+                OnPropertyChanged("UserId");
+            }
+        }
+
+        private Venue venue;
+
+        [JsonIgnore]
+        public Venue Venue
+        {
+            get { return venue; }
+            set
+            {
+                venue = value;
+
+                if (venue.categories != null)
+                {
+                    var firstCategory = venue.categories.FirstOrDefault();
+
+                    if (firstCategory != null)
+                    {
+                        CategoryId = firstCategory.id;
+                        CategoryName = firstCategory.name;
+                    }
+                }
+
+                if (venue.location != null)
+                {
+                    Address = venue.location.address;
+                    Distance = venue.location.distance;
+                    Latitude = venue.location.lat;
+                    Longitude = venue.location.lng;
+                }
+                VenueName = venue.name;
+                UserId = App.user.Id;
+
+                OnPropertyChanged("Venue");
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public static async void Insert(Post post)
+        {
+            await App.MobileService.GetTable<Post>().InsertAsync(post);
+        }
 
         public static async Task<List<Post>> Read()
         {
@@ -125,40 +187,24 @@ namespace TravelRecordApp.Model
             var categories = (from p in posts
                               orderby p.CategoryId
                               select p.CategoryName).Distinct().ToList();
-            //This is the same using LINQ Functions
-            //var categories2 = postTable.OrderBy(p => p.CategoryId).Select(p => p.CategoryName).Distinct().ToList();
 
             Dictionary<string, int> categoriesCount = new Dictionary<string, int>();
-
             foreach (var category in categories)
             {
                 var count = (from post in posts
                              where post.CategoryName == category
                              select post).ToList().Count;
-                //This is the same using LINQ Functions
-                //var count2 = postTable.Where(p => p.CategoryName == category).ToList().Count;
 
                 categoriesCount.Add(category, count);
             }
 
             return categoriesCount;
         }
-        public static async void Insert(Post post)
-        {
-            await App.MobileService.GetTable<Post>().InsertAsync(post);
-        }
-        public static  async void Update(Post selectedPost)
-        {
-            await App.MobileService.GetTable<Post>().UpdateAsync(selectedPost);
-        }
-        public static async void Delete(Post selectedPost)
-        {
-            await App.MobileService.GetTable<Post>().DeleteAsync(selectedPost);
-        }
 
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

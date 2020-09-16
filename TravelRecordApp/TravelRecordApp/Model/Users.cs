@@ -10,7 +10,6 @@ namespace TravelRecordApp.Model
     public class Users : INotifyPropertyChanged
     {
         private string id;
-
         public string Id
         {
             get { return id; }
@@ -45,13 +44,26 @@ namespace TravelRecordApp.Model
             }
         }
 
+        private string confirmPassword;
+
+        public string ConfirmPassword
+        {
+            get { return confirmPassword; }
+            set
+            {
+                confirmPassword = value;
+                OnPropertyChanged("ConfirmPassword");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public static async Task<bool> Login(string email, string password)
         {
             bool isEmailEmpty = string.IsNullOrEmpty(email);
@@ -64,17 +76,14 @@ namespace TravelRecordApp.Model
             else
             {
                 var user = (await App.MobileService.GetTable<Users>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
+
                 if (user != null)
                 {
+                    App.user = user;
                     if (user.Password == password)
-                    {
-                        App.user = user;
                         return true;
-                    }
                     else
-                    {
                         return false;
-                    }
                 }
                 else
                 {

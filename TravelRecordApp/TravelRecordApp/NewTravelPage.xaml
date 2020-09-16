@@ -5,14 +5,17 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save"
                      IconImageSource="save.png"
-                     Clicked="SaveButton_Clicked"/>
+                     Command="{Binding PostCommand}"
+                     CommandParameter="{Binding Post}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="cointainerStackLayout">
             <Entry x:Name="experienceEntry"
-                   Placeholder="Write your experience"/>
+                   Placeholder="Write your experience"
+                   Text="{Binding Experience, Mode=TwoWay}"/>
             <ListView x:Name="venueListView"
+                      SelectedItem="{Binding Venue, Mode=TwoWay}"
                       Margin="20, 0"
                       HorizontalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
@@ -32,9 +35,9 @@
                                        FontAttributes="Bold"/>
                                 <Label Grid.Row="1"
                                        TextColor="DodgerBlue"
-                                       Text="{Binding location.address, StringFormat='{0} meters'}"/>
+                                       Text="{Binding location.address}"/>
                                 <Label Grid.Column="1"
-                                       Text="{Binding location.distance}"/>
+                                       Text="{Binding location.distance, StringFormat='{0} meters'}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

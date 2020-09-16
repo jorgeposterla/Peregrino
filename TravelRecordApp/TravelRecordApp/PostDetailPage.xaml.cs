@@ -36,7 +36,7 @@ namespace TravelRecordApp
         {
             selectedPost.Experience = experienceEntry.Text;
 
-            Post.Update(selectedPost);
+            await App.MobileService.GetTable<Post>().UpdateAsync(selectedPost);
             await DisplayAlert("Success!", "Experience successfully updated", "Ok");
             //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             //{
@@ -56,7 +56,7 @@ namespace TravelRecordApp
 
         async void deleteButton_Clicked(object sender, EventArgs e)
         {
-            Post.Delete(selectedPost);
+            await App.MobileService.GetTable<Post>().DeleteAsync(selectedPost);
             await DisplayAlert("Success!", "Experience successfully deleted", "Ok");
             //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             //{

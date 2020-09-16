@@ -1,2 +1,2 @@
-AdbTarget=-s NSXJA17213142472
+AdbTarget=-s emulator-5554
 AdbOptions=

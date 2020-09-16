@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,10 @@ using TravelRecordApp.Helpers;
 
 namespace TravelRecordApp.Model
 {
-       public class Location
+    public class Location
     {
         public string address { get; set; }
+        public string crossStreet { get; set; }
         public double lat { get; set; }
         public double lng { get; set; }
         public int distance { get; set; }
@@ -20,7 +22,6 @@ namespace TravelRecordApp.Model
         public string state { get; set; }
         public string country { get; set; }
         public IList<string> formattedAddress { get; set; }
-        public string crossStreet { get; set; }
     }
 
     public class Category
@@ -67,6 +68,7 @@ namespace TravelRecordApp.Model
     public class VenueRoot
     {
         public Response response { get; set; }
+
         public static string GenerateURL(double latitude, double longitude)
         {
             return string.Format(Constants.VENUE_SEARCH, latitude, longitude, Constants.CLIENT_ID, Constants.CLIENT_SECRET, DateTime.Now.ToString("yyyyMMdd"));
