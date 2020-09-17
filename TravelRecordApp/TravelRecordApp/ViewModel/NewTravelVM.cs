@@ -79,7 +79,7 @@ namespace TravelRecordApp.ViewModel
             try
             {
                 Post.Insert(post);
-                await App.Current.MainPage.DisplayAlert("Success", "Experience succesfully inserter", "Ok");
+                await App.Current.MainPage.DisplayAlert("Success", "Experience succesfully inserted", "Ok");
             }
             catch (NullReferenceException nre)
             {
